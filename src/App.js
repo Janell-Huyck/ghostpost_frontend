@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import IndividualPost from './post.js'
+import { IndividualPost, MakePost } from './components.js'
 
 class App extends React.Component {
   constructor (props) {
@@ -12,15 +12,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("i'm in component did mount")
     fetch('http://127.0.0.1:8000/api/ghostpost/')
       .then(res => res.json())
       .then(data => this.setState({ posts: data, isLoaded: true }))
-    console.log("data received is:", this.state.posts)
   }
 
   time_sort = () => {
-    console.log("i'm sorting by time")
     this.setState({ isLoaded: false })
     let time_sorted = [...this.state.posts]
     time_sorted.sort(function (a, b) {
@@ -30,7 +27,6 @@ class App extends React.Component {
   }
 
   score_sort = () => {
-    console.log("i'm sorting by score")
     this.setState({ isLoaded: false })
     let score_sorted = [...this.state.posts]
     score_sorted.sort(function (a, b) {
@@ -40,9 +36,7 @@ class App extends React.Component {
   }
 
 
-
   show_all = () => {
-    console.log("i'm getting all posts")
     this.setState({ isLoaded: false })
     fetch('http://127.0.0.1:8000/api/ghostpost/')
       .then(res => res.json())
@@ -51,7 +45,6 @@ class App extends React.Component {
 
 
   show_boasts = () => {
-    console.log("i'm getting all boasts")
     this.setState({ isLoaded: false })
     fetch('http://127.0.0.1:8000/api/boasts/')
       .then(res => res.json())
@@ -59,13 +52,11 @@ class App extends React.Component {
   }
 
   show_roasts = () => {
-    console.log("i'm getting all roasts")
     this.setState({ isLoaded: false })
     fetch('http://127.0.0.1:8000/api/roasts/')
       .then(res => res.json())
       .then(data => this.setState({ posts: data, isLoaded: true }))
   }
-
 
 
   render() {
@@ -87,32 +78,38 @@ class App extends React.Component {
       return (
 
         < div >
-          <div>
+          <div className="card-body">
             <button onClick={this.show_all}>Show All Posts</button>
             <button onClick={this.show_boasts}>Show All Boasts</button>
             <button onClick={this.show_roasts}>Show All Roasts</button>
           </div>
-          <div>
+          <div className="card-body">
             <button onClick={this.time_sort}>Sort by Time</button>
             <button onClick={this.score_sort}>Sort by Score</button>
           </div>
+          <div>
+            <MakePost />
+          </div>
 
-          <ul>
+          <div className="d-flex justify-content-around flex-wrap p-2">
             {this.state.posts.map(post => {
               return (
-                < li key={post.id} >
-                  <IndividualPost id={post.id}
-                    is_boast={post.is_boast}
-                    text={post.text}
-                    time={post.submission_time}
-                    score={post.score}
-                    up_votes={post.up_votes}
-                    down_votes={post.down_votes} />
+
+                < li key={post.id} className="card col-sm-3 border-secondary m-5">
+                  <div className="card-body">
+                    <IndividualPost id={post.id}
+                      is_boast={post.is_boast}
+                      text={post.text}
+                      time={post.submission_time}
+                      score={post.score}
+                      up_votes={post.up_votes}
+                      down_votes={post.down_votes} />
+                  </div>
                 </li>
               )
             })
             }
-          </ul>
+          </div>
         </div >
       )
     }
