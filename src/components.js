@@ -119,12 +119,16 @@ export class MakePost extends React.Component {
 
     render() {
         return (
-            <form onSubmit={(event) => this.handleFormSubmit(event)}>
-                <div>
-                    <input type="radio" id="true" name="is_boast" value="true" defaultChecked />
-                    <label htmlFor="true">Boast</label><br />
-                    <input type="radio" id="false" name="is_boast" value="false" />
-                    <label htmlFor="false">Roast</label><br />
+            <form className="d-flex flex-column " onSubmit={(event) => this.handleFormSubmit(event)}>
+                <div className="d-flex justify-content-around ">
+                    <div>
+                        <input type="radio" id="true" name="is_boast" value="true" defaultChecked />
+                        <label htmlFor="true">Boast</label><br />
+                    </div>
+                    <div>
+                        <input type="radio" id="false" name="is_boast" value="false" />
+                        <label htmlFor="false">Roast</label><br />
+                    </div>
                 </div>
                 <textarea name="text"
                     type="textarea"
@@ -136,7 +140,7 @@ export class MakePost extends React.Component {
                     value={this.state.value}
                 ></textarea>
                 <br />
-                <div >
+                <div className="align-self-center">
                     <input
                         type="submit"
                         value="Post It!"

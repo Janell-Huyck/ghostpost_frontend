@@ -76,18 +76,19 @@ class App extends React.Component {
     }
     else {
       return (
-
-        < div >
-          <div className="card-body">
-            <button onClick={this.show_all}>Show All Posts</button>
-            <button onClick={this.show_boasts}>Show All Boasts</button>
-            <button onClick={this.show_roasts}>Show All Roasts</button>
+        <div>
+          < div className="d-flex">
+            <div className="card-body">
+              <button onClick={this.show_all}>Show All Posts</button>
+              <button onClick={this.show_boasts}>Show All Boasts</button>
+              <button onClick={this.show_roasts}>Show All Roasts</button>
+            </div>
+            <div className="card-body">
+              <button onClick={this.time_sort}>Sort by Time</button>
+              <button onClick={this.score_sort}>Sort by Score</button>
+            </div>
           </div>
-          <div className="card-body">
-            <button onClick={this.time_sort}>Sort by Time</button>
-            <button onClick={this.score_sort}>Sort by Score</button>
-          </div>
-          <div>
+          <div className="card col-sm-3 border-secondary m-5">
             <MakePost />
           </div>
 
